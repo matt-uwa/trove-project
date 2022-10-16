@@ -12,17 +12,17 @@ int main(int argc, char *argv[]) {
     int lFlag = 0;
     int rFlag = 0;
     int uFlag = 0;
+    int limitFlag = 0;
     char *progName = argv[0];
     while ((opt = getopt(argc, argv, ":bf:l:ru")) != -1) {
         switch (opt) {
             case 'b':
                 // flag: "-b" (build new trovefile from contents in filelist)
-                if (bFlag) {
+                if (limitFlag) {
                     printUsage(progName);
                 }
                 bFlag++;
-                rFlag++;
-                uFlag++;
+                limitFlag++;
                 printf("option selected: -b\n");
                 break;
             case 'f':
@@ -31,8 +31,8 @@ int main(int argc, char *argv[]) {
                     printUsage(progName);
                 }
                 fFlag++;
-                printf("option selected: -f %s\n", optarg);
                 // trovePath = optarg;
+                // printf("option selected: -f %s\n", trovePath);
                 break;
             case 'l':
                 // flag: "-l length" (only words with provided length are added to trovefile)
@@ -40,27 +40,25 @@ int main(int argc, char *argv[]) {
                     printUsage(progName);
                 }
                 lFlag++;
-                printf("option selected: -l %s\n", optarg);
                 // minLength = atoi(optarg);
+                // printf("option selected: -l %d\n", minLength);
                 break;
             case 'r':
                 // flag: "-r" (if any files from filelist appear in the trovefile, remove them)
-                if (rFlag) {
+                if (limitFlag) {
                     printUsage(progName);
                 }
                 rFlag++;
-                bFlag++;
-                uFlag++;
+                limitFlag++;
                 printf("option selected: -r\n");
                 break;
             case 'u':
                 // flag: "-u" (update the trovefile with contents of all files in the filelist)
-                if (uFlag) {
+                if (limitFlag) {
                     printUsage(progName);
                 }
                 uFlag++;
-                bFlag++;
-                rFlag++;
+                limitFlag++;
                 printf("option selected: -u\n");
                 break;
             case '?':
@@ -74,18 +72,14 @@ int main(int argc, char *argv[]) {
     if (optind < argc) {
         while (optind < argc) {
             if (bFlag) {
-                // non option args are the file list
                 char *pathName = argv[optind];
                 findfiles(pathName);
             } else {
                 // non option arg is a word
             }
-            // printf("%s\n", argv[optind++]);
             optind++;
         }
     }
-    // printf("Given pathname: %s\n", trovePath);
-    // printf("Minimum Length: %d\n", minLength);
     exit(EXIT_SUCCESS);
     return(0);
 }

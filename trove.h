@@ -1,11 +1,11 @@
 // header files required by all files
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <string.h>
 #include <getopt.h>
 #include <dirent.h>
 #include <limits.h>
 
-#define _GNU_SOURCE
 #include <stdlib.h>
 // global preprocessor constants
 
