@@ -17,49 +17,39 @@ int main(int argc, char *argv[]) {
     while ((opt = getopt(argc, argv, ":bf:l:ru")) != -1) {
         switch (opt) {
             case 'b':
-                // flag: "-b" (build new trovefile from contents in filelist)
                 if (limitFlag) {
                     printUsage(progName);
                 }
                 bFlag++;
                 limitFlag++;
-                printf("option selected: -b\n");
                 break;
             case 'f':
-                // flag: "-f trovefile" (name of trovefile to be built or searched)
                 if (fFlag) {
                     printUsage(progName);
                 }
                 fFlag++;
-                // trovePath = optarg;
-                // printf("option selected: -f %s\n", trovePath);
+                trovePath = optarg;
                 break;
             case 'l':
-                // flag: "-l length" (only words with provided length are added to trovefile)
                 if (lFlag) {
                     printUsage(progName);
                 }
                 lFlag++;
-                // minLength = atoi(optarg);
-                // printf("option selected: -l %d\n", minLength);
+                minLength = atoi(optarg);
                 break;
             case 'r':
-                // flag: "-r" (if any files from filelist appear in the trovefile, remove them)
                 if (limitFlag) {
                     printUsage(progName);
                 }
                 rFlag++;
                 limitFlag++;
-                printf("option selected: -r\n");
                 break;
             case 'u':
-                // flag: "-u" (update the trovefile with contents of all files in the filelist)
                 if (limitFlag) {
                     printUsage(progName);
                 }
                 uFlag++;
                 limitFlag++;
-                printf("option selected: -u\n");
                 break;
             case '?':
                 fprintf(stderr, "%s: unknown option [%c]\n", progName, optopt);
@@ -73,7 +63,7 @@ int main(int argc, char *argv[]) {
         while (optind < argc) {
             if (bFlag) {
                 char *pathName = argv[optind];
-                findfiles(pathName);
+                build(pathName);
             } else {
                 // non option arg is a word
             }

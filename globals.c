@@ -1,5 +1,5 @@
 // initialises global variables defined in trove.h
 #include "trove.h"
 
-// trovePath = "/tmp/trove";
-int minLengh = 4;
+char *trovePath = "/tmp/trove";
+int minLength = 4;
