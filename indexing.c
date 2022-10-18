@@ -25,7 +25,7 @@ void indexing(char filefound[]){
 
                 // COPY CONTENTS TO DESTINATION
                 while( (got = fread(buffer, 1, sizeof buffer, fp_in)) > 0) {
-                        printf("%s\n", buffer);
+                        // printf("%s\n", buffer);
                 }
                 words(buffer);
         }
