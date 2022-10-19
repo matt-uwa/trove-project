@@ -61,11 +61,18 @@ int main(int argc, char *argv[]) {
     }
     if (optind < argc) {
         while (optind < argc) {
-            if (bFlag) {
-                char *pathName = argv[optind];
-                build(pathName);
+            if (limitFlag) {
+                if (bFlag) {
+                    char *pathName = argv[optind];
+                    build(pathName);
+                } else if (rFlag) {
+                    // remove
+                } else if (uFlag) {
+                    // update
+                }
             } else {
                 // non option arg is a word
+                // search trovefile
             }
             optind++;
         }

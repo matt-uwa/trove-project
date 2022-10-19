@@ -20,6 +20,9 @@ extern void findfiles(char*);
 extern void build(char*);
 extern void indexing(char*);
 extern void words(char*);
+extern void filenames(char*);
+extern void removeData(char*);
+extern void updateData(char*);
 
 // GLOBAL VARIABLES (NO DATA SIZE)
 // Store abs pathname of the trovefile (default /tmp/trove)
@@ -27,13 +30,17 @@ extern char *trovePath;
 // Min word length from -l flag
 extern int minLength;
 
-typedef struct _troveInfo{
-        char            *pathName;
-        struct _troveInfo       *next;
-} TINFO;
+// GLOBAL VARIABLES (NO DATA SIZE)
+// Store abs pathname of the trovefile (default /tmp/trove)
+extern char *trovePath;
+// Min word length from -l flag
+extern int minLength;
 
 // THESE ARE THE DATATYPES AND FUNCTION DECLARATIONS FOR THE LIST
 // TO BE USED FOR THE HASHTABLE
+
+//PREPROCESSOR MACRO TO CHECK IF ALLOCATIONS WERE SUCCESSFUL
+#define CHECK_ALLOC(p) if(p == NULL) {perror(__func__); exit(EXIT_FAILURE);}
 
 // LIST DATA TYPE
 typedef struct _list{
@@ -44,5 +51,11 @@ typedef struct _list{
 // FUNCTIONS TO BE USED IN LIST FUNCTIONS
 extern  LIST *list_new(void);
 extern  LIST *list_add(LIST*, char*);
-extern  bool list_find(LIST, char*);
+extern  bool list_find(LIST*, char*);
 extern  void list_print(LIST*);
+
+// DEF STRUCT TO STORE ABS PATHNAME AND LIST
+struct troveInfo{
+        char    *pathName;
+        LIST    uniqueWords;
+};
