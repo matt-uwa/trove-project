@@ -18,24 +18,22 @@ void indexing(char filefound[]){
                 struct stat st;
                 stat(filefound, &st);
                 int size = st.st_size;
+                printf("buffer size: %i\n", size);
 
-                // MALLOC-ING BUFFER SIZE
+                // ALLOCATING BUFFER SIZE
                 char buffer[size];
                 size_t got;
 
-                // COPY CONTENTS TO DESTINATION
+                // READ CONTENTS AND COPY CONTENTS TO DESTINATION
                 while( (got = fread(buffer, 1, sizeof buffer, fp_in)) > 0) {
-                        // printf("%s\n", buffer);
+                        words(buffer, filefound); // here the unique word list is extracted
                 }
-                words(buffer);
         }
 
         // ENSURE THAT WE ONLY CLOSE FILES THAT ARE OPEN
         if(fp_in != NULL){
                 fclose(fp_in);
         }
-
-        
 //      if(fp_out != NULL){
 //              fclose(fp_out);
 //      }
