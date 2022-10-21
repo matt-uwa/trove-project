@@ -42,21 +42,17 @@ void hashtable_print(void){
 void build(char *pathName) {
         struct stat path;
         stat(pathName, &path);
-
-        hashtable = hashtable_new();
-
         // checks if pathName corresonds to a file or a directory
         if (S_ISDIR(path.st_mode)) {
                 findfiles(pathName);
         }
         else if (S_ISREG(path.st_mode)){
                 // stop recursion
-                printf("FILE FOUND: %s\n", pathName);
+                printf("        NEW FILE FOUND: %s\n", pathName);
                 indexing(pathName);
         }
         else{
                 printf("Could not locate directory or file named <%s>.\n", pathName);
         }
-        // hashtable_print();
         trovefile();
 }
